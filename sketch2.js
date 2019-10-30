@@ -1,30 +1,40 @@
 var initial_text;
 var cnv;
-var name;
+var url_string = window.location.href
+var url = new URL(url_string);
+var code = url.searchParams.get("code");
+var name = url.searchParams.get("nome");
+var win = url.searchParams.get("win");
 var matrix;
-
 
 function preload(){
   matrix = loadFont("TravelingTypewriter.ttf")
+
 }
 
 function setup(){
+
   createCanvas(windowWidth,windowHeight)
   background("black");
   translate(width/2, height/2)
   fill("green");
   textSize(30);
-  textFont(matrix)
   textAlign(CENTER)
-  let one = text("WELCOME\n\nenter your name", 0, -100)
+  textFont(matrix)
+  if (win=='true') {
+    let one = text("Congratulation " + name + "\n\n The code was " + code, 0, -100)
+  } else if (win=='false') {
+    let one = text("I'm sorry " + name +", you lost \n\n The code was " + code, 0, -100)
+  }
+
+  rectMode(CENTER)
+  rect(0,105,150,100);
+  fill('black')
+  textAlign(CENTER,CENTER)
+  text(' RETRY', 0, 100, 150,100)
 
 
-  //initial_text = createDiv("we are here")
-  let inp = createInput('');
-  inp.input(myInputEvent);
-  //inp.style("align", "center")
-  inp.position(windowWidth/2-inp.width/2,windowHeight/2+80)
-  //initial_text.position(windowWidth/2-inp.width/2,windowHeight/2+200)
+
 
 
 
@@ -41,10 +51,10 @@ function setup(){
 
 
 }
-function keyPressed(){
-  if (keyCode==ENTER) {
+function mouseClicked(){
+  var d = dist(mouseX, mouseY, windowWidth/2, windowHeight/2+100)
+  if (d<50) {
     window.open('index1.html?nome=' + name, '_self')
-
   }
 }
 
