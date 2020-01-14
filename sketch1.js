@@ -378,3 +378,10 @@ function keyPressed() {
       this.allies.html(params.n1 + ' ' + params.n2 + ' ' + params.n3 + ' ' + params.n4)
     }
   }
+
+
+
+
+  function windowResized() {
+  	resizeCanvas(windowWidth, windowHeight);
+  }
